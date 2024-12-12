@@ -11,4 +11,8 @@ services:
         sync: false
       - key: ADMIN_PASSWORD
         sync: false
-    postDeploy: python create_admin.py 
+    postDeploy: |
+      flask db init || true
+      flask db migrate
+      flask db upgrade
+      python create_admin.py 
